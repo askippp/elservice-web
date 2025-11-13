@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api",
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -16,4 +16,25 @@ client.interceptors.request.use((config) => {
   return config;
 })
 
+client.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error?.response?.status === 401) {
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userRole");
+      localStorage.removeItem("userData");
+      localStorage.removeItem("userDetail");
+      // Optional: redirect to login page if desired
+      if (typeof window !== "undefined") {
+        const current = window.location.pathname;
+        if (current !== "/") {
+          window.location.replace("/");
+        }
+      }
+    }
+    return Promise.reject(error);
+  }
+)
+
 export default client;
+

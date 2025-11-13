@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { login, logout } from "../api/service/authApi";
 import { useNavigate } from "react-router-dom";
-import client from "../api/client";
+ 
 
 export const getUserData = () => {
   const token = localStorage.getItem("authToken");
@@ -24,21 +24,22 @@ export const getUserData = () => {
 // debug tampilkan semua data user
 export const debugUserData = () => {
   const data = getUserData();
-  
-  console.log("=== DEBUG USER DATA ===");
-  console.log("Token:", data.token);
-  console.log("Role:", data.role);
-  console.log("Is Authenticated:", data.isAuthenticated);
-  console.log("User Data:", data.user);
-  console.log("User Detail:", data.detail);
-  console.log("Full Data Object:", data);
-  console.log("=======================");
+  if (import.meta.env?.DEV) {
+    console.log("=== DEBUG USER DATA ===");
+    console.log("Token:", data.token);
+    console.log("Role:", data.role);
+    console.log("Is Authenticated:", data.isAuthenticated);
+    console.log("User Data:", data.user);
+    console.log("User Detail:", data.detail);
+    console.log("Full Data Object:", data);
+    console.log("=======================");
+  }
   
   return data;
 };
 
 // Export ke window untuk bisa dipanggil dari browser console
-if (typeof window !== "undefined") {
+if (import.meta.env?.DEV && typeof window !== "undefined") {
   window.debugUserData = debugUserData;
   window.getUserData = getUserData;
 }
@@ -70,20 +71,19 @@ export const useAuth = () => {
         localStorage.setItem("userDetail", JSON.stringify(response.data.detail));
       }
 
-      //set header default axios dengan token
-      client.defaults.headers.common["Authorization"] = `Bearer ${response.data?.token}`;
-
       //get role dari response
       const role = response.data?.role;
 
       // DEBUG: Tampilkan semua data user yang login
-      console.log("=== LOGIN SUCCESS ===");
-      console.log("Token:", response.data?.token);
-      console.log("Role:", response.data?.role);
-      console.log("User Data:", response.data?.user);
-      console.log("User Detail:", response.data?.detail);
-      console.log("Full Response:", response.data);
-      console.log("====================");
+      if (import.meta.env?.DEV) {
+        console.log("=== LOGIN SUCCESS ===");
+        console.log("Token:", response.data?.token);
+        console.log("Role:", response.data?.role);
+        console.log("User Data:", response.data?.user);
+        console.log("User Detail:", response.data?.detail);
+        console.log("Full Response:", response.data);
+        console.log("====================");
+      }
       
       // Debug dengan helper function
       debugUserData();
@@ -91,7 +91,7 @@ export const useAuth = () => {
       //redirect berdasarkan role
       switch (role) {
         case "admin":
-          navigate("/admin/operators");
+          navigate("/admin/dashboard");
           break;
         case "operator":
           navigate("/operator/dashboard");
@@ -124,7 +124,6 @@ export const useAuth = () => {
       localStorage.removeItem("userRole");
       localStorage.removeItem("userData");
       localStorage.removeItem("userDetail");
-      delete client.defaults.headers.common["Authorization"];
       navigate("/");
     }
   };
