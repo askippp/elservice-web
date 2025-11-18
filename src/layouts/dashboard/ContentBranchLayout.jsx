@@ -2,22 +2,29 @@ import { useState } from "react";
 import BranchTableHeader from "../../ui/branch/BranchTableHeader";
 import CardBranch, { sampleBranches } from "../../ui/cards/CardBranch";
 import Pagination from "../../ui/branch/Pagination";
+import FormUpdateCabang from "../../ui/forms/FormUpdateCabang";
 
 export default function ContentBranchLayout({ children }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [selectedBranch, setSelectedBranch] = useState(null);
 
-  const handleCheckDetail = (branchId) => {
-    console.log("Check detail for branch:", branchId);
+  const handleCheckDetail = (branch) => {
+    setSelectedBranch(branch);
+    setShowUpdateForm(true);
   };
 
   const handleDelete = (branchId) => {
     console.log("Delete branch:", branchId);
   };
 
+  const handleUpdate = (formData) => {
+    console.log("Update branch:", formData);
+  };
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
     console.log("Current page:", page);
-    // Tambahkan logic untuk fetch data berdasarkan page
   };
 
   return (
@@ -39,7 +46,7 @@ export default function ContentBranchLayout({ children }) {
               service={branch.service}
               isActive={branch.isActive}
               imageSrc={branch.imageSrc}
-              onCheckDetail={() => handleCheckDetail(branch.id)}
+              onCheckDetail={() => handleCheckDetail(branch)}
               onDelete={() => handleDelete(branch.id)}
             />
           ))}
@@ -53,6 +60,16 @@ export default function ContentBranchLayout({ children }) {
         />
       </div>
       {children}
+
+      {/* Form Update Cabang */}
+      {showUpdateForm && selectedBranch && (
+        <FormUpdateCabang
+          onClose={() => setShowUpdateForm(false)}
+          onUpdate={handleUpdate}
+          onDelete={handleDelete}
+          branchData={selectedBranch}
+        />
+      )}
     </div>
   );
 }
