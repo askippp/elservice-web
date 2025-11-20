@@ -1,6 +1,6 @@
 import AddBranch from "../buttons/AddBranch";
 
-export default function BranchTableHeader() {
+export default function BranchTableHeader({ onFilterChange, currentFilter = "manage" }) {
   return (
     <div className="bg-white rounded-xl p-4">
       <div className="flex items-center justify-between gap-4">
@@ -45,7 +45,12 @@ export default function BranchTableHeader() {
         <div className="flex items-center gap-2">
           {/* Manage Button */}
           <button 
-            className="px-6 py-2 bg-gradient-to-b from-purple-600 to-purple-400 text-white text-xs font-semibold hover:from-purple-700 hover:to-purple-500 transition-all"
+            onClick={() => onFilterChange("manage")}
+            className={`px-6 py-2 text-xs font-semibold transition-all ${
+              currentFilter === "manage"
+                ? "bg-gradient-to-b from-purple-600 to-purple-400 text-white"
+                : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+            }`}
             style={{ borderRadius: '0 0 20px 20px' }}
           >
             Manage
@@ -53,7 +58,12 @@ export default function BranchTableHeader() {
 
           {/* Active Br. Button */}
           <button 
-            className="px-6 py-2 bg-gradient-to-b from-purple-600 to-purple-400 text-white text-xs font-semibold hover:from-purple-700 hover:to-purple-500 transition-all"
+            onClick={() => onFilterChange("active")}
+            className={`px-6 py-2 text-xs font-semibold transition-all ${
+              currentFilter === "active"
+                ? "bg-gradient-to-b from-purple-600 to-purple-400 text-white"
+                : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+            }`}
             style={{ borderRadius: '0 0 20px 20px' }}
           >
             Active Br.
@@ -61,7 +71,12 @@ export default function BranchTableHeader() {
 
           {/* Inactive Br. Button */}
           <button 
-            className="px-6 py-2 bg-gradient-to-b from-purple-600 to-purple-400 text-white text-xs font-semibold hover:from-purple-700 hover:to-purple-500 transition-all"
+            onClick={() => onFilterChange("inactive")}
+            className={`px-6 py-2 text-xs font-semibold transition-all ${
+              currentFilter === "inactive"
+                ? "bg-gradient-to-b from-purple-600 to-purple-400 text-white"
+                : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+            }`}
             style={{ borderRadius: '0 0 20px 20px' }}
           >
             Inactive Br.

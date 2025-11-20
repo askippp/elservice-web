@@ -8,6 +8,13 @@ export default function ContentBranchLayout({ children }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState(null);
+  const [filter, setFilter] = useState("manage");
+
+  // Filter branches berdasarkan status
+  const filteredBranches = 
+    filter === "active" ? sampleBranches.filter(b => b.isActive) :
+    filter === "inactive" ? sampleBranches.filter(b => !b.isActive) :
+    sampleBranches; // manage = semua
 
   const handleCheckDetail = (branch) => {
     setSelectedBranch(branch);
@@ -27,6 +34,11 @@ export default function ContentBranchLayout({ children }) {
     console.log("Current page:", page);
   };
 
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    setCurrentPage(1); // Reset ke halaman 1 saat filter berubah
+  };
+
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-gray-100 p-8">
@@ -34,12 +46,15 @@ export default function ContentBranchLayout({ children }) {
      
         {/* Branch Table Header (Filter & Search) */}
         <div className="mt-6">
-          <BranchTableHeader />
+          <BranchTableHeader 
+            onFilterChange={handleFilterChange}
+            currentFilter={filter}
+          />
         </div>
 
         {/* Branch Cards Grid - Posisi di bawah BranchTableHeader */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {sampleBranches.map((branch) => (
+          {filteredBranches.map((branch) => (
             <CardBranch
               key={branch.id}
               branchName={branch.branchName}
