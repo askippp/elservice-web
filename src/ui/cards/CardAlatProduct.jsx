@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AddAlat from "../buttons/AddAlat";
-import CariAlat from "../operator/CariAlat";
+import CariAlat from "../product/CariAlat";
 import CheckDetailAlat from "../buttons/CheckDetailAlat";
 import DeleteAlat from "../buttons/DeleteAlat";
 
