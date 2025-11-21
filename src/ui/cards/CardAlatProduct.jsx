@@ -2,18 +2,13 @@ import { useState } from "react";
 import AddAlat from "../buttons/AddAlat";
 import CariAlat from "../operator/CariAlat";
 import CheckDetailAlat from "../buttons/CheckDetailAlat";
+import DeleteAlat from "../buttons/DeleteAlat";
 
 export default function CardAlatProduct() {
   const [selectedCard, setSelectedCard] = useState(null);
 
-  const handleAddAlat = () => {
-    console.log("Add Alat clicked");
-    // Logic untuk add alat
-  };
-
   const handleSearch = (searchTerm) => {
     console.log("Search Alat:", searchTerm);
-    // Logic untuk search alat
   };
 
   const handleCardClick = (id) => {
@@ -22,10 +17,8 @@ export default function CardAlatProduct() {
 
   const handleDelete = (id) => {
     console.log("Delete:", id);
-    // Logic untuk delete
   };
 
-  // Sample data alat
   const alats = [
     { id: 1, nama: "Mesin Cuci Front Load", isActive: true },
     { id: 2, nama: "Kulkas 2 Pintu", isActive: true },
@@ -47,10 +40,10 @@ export default function CardAlatProduct() {
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm">
-      {/* Search & Add Button - Sejajar */}
+      {/* Search & Add Button */}
       <div className="flex items-center justify-between mb-6">
         <CariAlat onSearch={handleSearch} />
-        <AddAlat onClick={handleAddAlat} />
+        <AddAlat />
       </div>
 
       {/* Cards Grid */}
@@ -94,22 +87,12 @@ export default function CardAlatProduct() {
                   onClick={(e) => e.stopPropagation()}
                   className="flex-1 px-3 py-1.5 text-sm border-2 border-purple-500 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 min-w-0"
                 />
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDelete(alat.id);
-                  }}
-                  className="w-9 h-9 bg-white border-2 border-gray-900 rounded-lg hover:bg-red-50 transition-colors flex items-center justify-center flex-shrink-0"
-                >
-                  <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                </button>
               </div>
 
-              {/* Check Detail Button - Menggunakan Component Terpisah */}
-              <div className="flex justify-end" onClick={(e) => e.stopPropagation()}>
+              {/* Check Detail & Delete Button */}
+              <div className="flex justify-center items-center gap-3" onClick={(e) => e.stopPropagation()}>
                 <CheckDetailAlat isActive={alat.isActive} />
+                <DeleteAlat onClick={() => handleDelete(alat.id)} />
               </div>
             </div>
           </div>
