@@ -19,22 +19,17 @@ export default function CardBranch({
   // Tentukan warna border dan shadow berdasarkan status
   const getBorderColor = () => {
     if (isClicked) {
-      return isActive ? 'border-purple-500' : 'border-red-500';
+      return isActive 
+        ? 'border-purple-500 shadow-[0_6px_0_0_rgb(168,85,247)]' 
+        : 'border-red-500 shadow-[0_6px_0_0_rgb(239,68,68)]';
     }
     return 'border-gray-700';
-  };
-
-  const getShadowColor = () => {
-    if (isClicked) {
-      return isActive ? 'shadow-[0_8px_0_0_rgb(168,85,247)]' : 'shadow-[0_8px_0_0_rgb(239,68,68)]';
-    }
-    return 'shadow-sm';
   };
 
   return (
     <div 
       onClick={handleCardClick}
-      className={`bg-white rounded-2xl border-2 ${getBorderColor()} ${getShadowColor()} hover:shadow-md transition-all duration-300 cursor-pointer`}
+      className={`bg-white rounded-2xl border-2 ${getBorderColor()} transition-all duration-300 cursor-pointer`}
     >
       {/* Image Container */}
       <div className="relative">
