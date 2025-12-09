@@ -43,22 +43,39 @@ export default function FormUpdateCabang({ onClose, onUpdate, onDelete, branchDa
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden">
+        <div className="bg-white rounded-3xl w-full max-w-xl shadow-2xl overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-400 to-purple-300 px-6 py-4 relative">
-            <button
-              onClick={onClose}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-900 hover:text-gray-700"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <h2 className="text-lg font-bold text-center text-gray-900">Update Cabang</h2>
+          <div className="relative bg-purple-300 rounded-t-3xl overflow-hidden">
+            {/* Diagonal purple accent */}
+            <div className="absolute top-0 left-0 w-32 h-full bg-purple-700" style={{ clipPath: 'polygon(0 0, 100% 0, 70% 100%, 0% 100%)' }}></div>
+            
+            <div className="relative p-4 flex items-center gap-3">
+              <button
+                onClick={onClose}
+                className="w-14 h-14 bg-purple-600 rounded-2xl flex items-center justify-center hover:bg-purple-700 transition-colors shadow-lg z-10"
+              >
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  />
+                </svg>
+              </button>
+              <h2 className="text-2xl font-bold text-gray-900 absolute left-1/2 -translate-x-1/2">
+                Update Cabang
+              </h2>
+            </div>
           </div>
 
           {/* Form Content */}
-          <div className="p-6 max-h-[75vh] overflow-y-auto">
+          <div className="p-6 max-h-[70vh] overflow-y-auto">
             {/* Image Display */}
             <div className="mb-5">
               <div className="border-2 border-gray-300 rounded-2xl overflow-hidden">
@@ -125,21 +142,21 @@ export default function FormUpdateCabang({ onClose, onUpdate, onDelete, branchDa
               </div>
             </div>
 
-            {/* Status */}
-            <div className="mb-4">
-              <label className="block text-sm font-bold text-gray-900 mb-2">Status</label>
-              <select
-                name="status"
-                value={formData.status}
-                onChange={handleChange}
-                className={`w-full px-3 py-2.5 border-2 rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-opacity-50 ${getStatusColor()}`}
-              >
-                <option value="Aktif">Aktif</option>
-                <option value="Non-aktif">Non-aktif</option>
-              </select>
-            </div>
-
             <div className="grid grid-cols-2 gap-4 mb-4">
+              {/* Status */}
+              <div>
+                <label className="block text-sm font-bold text-gray-900 mb-2">Status</label>
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2.5 border-2 rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-opacity-50 ${getStatusColor()}`}
+                >
+                  <option value="Aktif">Aktif</option>
+                  <option value="Non-aktif">Non-aktif</option>
+                </select>
+              </div>
+
               {/* di buat pada */}
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-2">di buat pada</label>
@@ -152,18 +169,18 @@ export default function FormUpdateCabang({ onClose, onUpdate, onDelete, branchDa
                   className="w-full px-3 py-2.5 border-2 border-gray-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600"
                 />
               </div>
+            </div>
 
-              {/* di ubah pada */}
-              <div>
-                <label className="block text-sm font-bold text-gray-900 mb-2">di ubah pada</label>
-                <input
-                  type="text"
-                  name="diUbahPada"
-                  value={formData.diUbahPada}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2.5 border-2 border-gray-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600"
-                />
-              </div>
+            {/* di ubah pada */}
+            <div className="mb-4">
+              <label className="block text-sm font-bold text-gray-900 mb-2">di ubah pada</label>
+              <input
+                type="text"
+                name="diUbahPada"
+                value={formData.diUbahPada}
+                onChange={handleChange}
+                className="w-full px-3 py-2.5 border-2 border-gray-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600"
+              />
             </div>
 
             {/* Alamat Cabang */}
@@ -173,7 +190,7 @@ export default function FormUpdateCabang({ onClose, onUpdate, onDelete, branchDa
                 name="alamatCabang"
                 value={formData.alamatCabang}
                 onChange={handleChange}
-                rows="4"
+                rows="2"
                 className="w-full px-3 py-2.5 border-2 border-gray-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600 resize-none"
               />
             </div>

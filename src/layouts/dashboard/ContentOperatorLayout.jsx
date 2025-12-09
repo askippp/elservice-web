@@ -1,5 +1,6 @@
 import OperatorTableHeader from "../../ui/operator/OperatorTableHeader";
 import CardOperatorAdmin from "../../ui/cards/CardOperatorAdmin";
+import Pagination from "../../ui/operator/Pagination";
 
 export default function ContentOperatorLayout({ children }) {
   return (
@@ -14,6 +15,10 @@ export default function ContentOperatorLayout({ children }) {
 
         <div className="mt-4">
           <CardOperatorAdmin />
+        </div>
+
+        <div className="mt-6">
+          <Pagination />
         </div>
       </div>
       {children}
