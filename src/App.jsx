@@ -5,6 +5,7 @@ import BranchPage from './pages/admin/BranchPage.jsx';
 import OperatorAdminPage from './pages/admin/OperatorAdminPage.jsx';
 import ProductPage from './pages/admin/ProductPage.jsx';
 import TeknisiPage from './pages/admin/TeknisiPage.jsx';
+import LaporanPage from './pages/admin/LaporanPage.jsx';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Route path="/admin/operators" element={<OperatorAdminPage />} />
       <Route path="/admin/products" element={<ProductPage />} />
       <Route path="/admin/teknisi" element={<TeknisiPage />} />
+      <Route path="/admin/laporan" element={<LaporanPage />} />
     </Routes>
   );
 }

@@ -24,6 +24,12 @@ const icons = {
       <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm-7 8a7 7 0 0 1 14 0 1 1 0 0 1-1 1H6a1 1 0 0 1-1-1Z" />
     </svg>
   ),
+  laporan: (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z" />
+      <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+    </svg>
+  ),
 };
 
 export const navConfig = {
@@ -33,6 +39,7 @@ export const navConfig = {
     { label: "Product", to: "/admin/products", icon: icons.product },
     { label: "Teknisi", to: "/admin/teknisi", icon: icons.teknisi },
     { label: "Operator", to: "/admin/operators", icon: icons.operator },
+    { label: "Laporan", to: "/admin/laporan", icon: icons.laporan },
   ],
   operator: [
     { label: "Dashboard", to: "/operator/dashboard", icon: icons.dashboard },
