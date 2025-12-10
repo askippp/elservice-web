@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import DeleteTeknisi from '../buttons/DeleteTeknisi';
 import UpdateTeknisiLaporan from '../buttons/UpdateTeknisiLaporan';
-import AddTeknisiForm from './AddTeknisiForm';
+import AddLaporanTeknisi from './AddLaporanTeknisi';
+import NotifAddLaporanTeknisi from '../notif/notifAddLaporanTeknisi';
 
 export default function FormManageTeknisi({ onClose }) {
   const [teknisiList, setTeknisiList] = useState([
@@ -22,6 +23,7 @@ export default function FormManageTeknisi({ onClose }) {
   ]);
 
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showNotif, setShowNotif] = useState(false);
 
   const handleUpdateTeknisi = () => {
     // Callback untuk refresh data setelah update
@@ -42,10 +44,17 @@ export default function FormManageTeknisi({ onClose }) {
     };
     setTeknisiList([...teknisiList, teknisiWithId]);
     setShowAddForm(false);
+    
+    // Tampilkan notifikasi
+    setShowNotif(true);
   };
 
   const handleCloseAddForm = () => {
     setShowAddForm(false);
+  };
+
+  const handleCloseNotif = () => {
+    setShowNotif(false);
   };
 
   return (
@@ -125,7 +134,7 @@ export default function FormManageTeknisi({ onClose }) {
       {showAddForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60] p-4">
           <div className="relative">
-            <AddTeknisiForm
+            <AddLaporanTeknisi
               onClose={handleCloseAddForm}
               onAdd={handleAddTeknisi}
             />
@@ -141,6 +150,11 @@ export default function FormManageTeknisi({ onClose }) {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Notifikasi Success */}
+      {showNotif && (
+        <NotifAddLaporanTeknisi onClose={handleCloseNotif} />
       )}
     </div>
   );

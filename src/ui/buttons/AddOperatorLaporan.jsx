@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddOperatorForm from '../forms/AddOperatorForm';
+import FormAddLaporanOperator from '../forms/FormAddLaporanOperator';
 
 export default function AddOperatorLaporan({ onAdd }) {
   const [showForm, setShowForm] = useState(false);
@@ -10,10 +10,13 @@ export default function AddOperatorLaporan({ onAdd }) {
 
   const handleCloseForm = () => {
     setShowForm(false);
-    
-    // Panggil callback jika ada setelah form ditutup
+  };
+
+  const handleAdd = (newOperator) => {
+    console.log('New operator:', newOperator);
+    // Panggil callback jika ada
     if (onAdd) {
-      onAdd();
+      onAdd(newOperator);
     }
   };
 
@@ -29,7 +32,10 @@ export default function AddOperatorLaporan({ onAdd }) {
       {/* Modal Form */}
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <AddOperatorForm onClose={handleCloseForm} />
+          <FormAddLaporanOperator 
+            onClose={handleCloseForm}
+            onAdd={handleAdd}
+          />
         </div>
       )}
     </>

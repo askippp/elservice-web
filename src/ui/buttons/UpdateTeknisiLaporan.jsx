@@ -1,26 +1,29 @@
 import { useState } from 'react';
-import FormLihatAkunTeknisi from '../forms/FormLihatAkunTeknisi';
+import FormUpdateLaporanTeknisi from '../forms/FormUpdateLaporanTeknisi';
 
 export default function UpdateTeknisiLaporan({ teknisi, onUpdate }) {
-  const [showDetail, setShowDetail] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
-  const handleOpenDetail = () => {
-    setShowDetail(true);
+  const handleOpenForm = () => {
+    setShowForm(true);
   };
 
-  const handleCloseDetail = () => {
-    setShowDetail(false);
-    
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
+  const handleUpdate = (updatedTeknisi) => {
+    console.log('Updated teknisi:', updatedTeknisi);
     // Panggil callback jika ada untuk refresh data
     if (onUpdate) {
-      onUpdate();
+      onUpdate(updatedTeknisi);
     }
   };
 
   return (
     <>
       <button 
-        onClick={handleOpenDetail}
+        onClick={handleOpenForm}
         className="w-16 h-16 bg-white border-2 border-gray-900 rounded-xl hover:bg-purple-50 transition-colors flex items-center justify-center"
       >
         <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,12 +31,13 @@ export default function UpdateTeknisiLaporan({ teknisi, onUpdate }) {
         </svg>
       </button>
 
-      {/* Modal Detail Akun Teknisi */}
-      {showDetail && (
+      {/* Modal Update Teknisi */}
+      {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <FormLihatAkunTeknisi
+          <FormUpdateLaporanTeknisi
             teknisi={teknisi}
-            onClose={handleCloseDetail}
+            onClose={handleCloseForm}
+            onUpdate={handleUpdate}
           />
         </div>
       )}
