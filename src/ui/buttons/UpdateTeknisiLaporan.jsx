@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import DetailAkunOperator from '../forms/DetailAkunOperator';
+import FormLihatAkunTeknisi from '../forms/FormLihatAkunTeknisi';
 
-export default function UpdateOperatorLaporan({ operator, onUpdate }) {
+export default function UpdateTeknisiLaporan({ teknisi, onUpdate }) {
   const [showDetail, setShowDetail] = useState(false);
 
   const handleOpenDetail = () => {
@@ -28,11 +28,11 @@ export default function UpdateOperatorLaporan({ operator, onUpdate }) {
         </svg>
       </button>
 
-      {/* Modal Detail Akun */}
+      {/* Modal Detail Akun Teknisi */}
       {showDetail && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <DetailAkunOperator
-            operator={operator}
+          <FormLihatAkunTeknisi
+            teknisi={teknisi}
             onClose={handleCloseDetail}
           />
         </div>

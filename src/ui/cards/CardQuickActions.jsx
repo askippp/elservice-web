@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import FormManageOperator from '../forms/FormManageOperator';
+import FormManageTeknisi from '../forms/FormManageTeknisi';
 
 export default function CardQuickActions() {
   const [showOperatorForm, setShowOperatorForm] = useState(false);
+  const [showTeknisiForm, setShowTeknisiForm] = useState(false);
 
   return (
     <>
@@ -34,7 +36,10 @@ export default function CardQuickActions() {
           </button>
 
           {/* Manage Teknisi Button */}
-          <button className="bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-2xl p-8 text-white transition-all duration-300 hover:shadow-xl group">
+          <button 
+            onClick={() => setShowTeknisiForm(true)}
+            className="bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-2xl p-8 text-white transition-all duration-300 hover:shadow-xl group"
+          >
             <div className="flex flex-col items-center gap-3">
               <svg 
                 className="w-10 h-10 transition-transform duration-300 group-hover:scale-110" 
@@ -61,9 +66,13 @@ export default function CardQuickActions() {
         </div>
       </div>
 
-      {/* Form Modal */}
+      {/* Form Modals */}
       {showOperatorForm && (
         <FormManageOperator onClose={() => setShowOperatorForm(false)} />
+      )}
+
+      {showTeknisiForm && (
+        <FormManageTeknisi onClose={() => setShowTeknisiForm(false)} />
       )}
     </>
   );
